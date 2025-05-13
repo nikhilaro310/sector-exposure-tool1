@@ -72,33 +72,47 @@ export default function SectorExposureTool() {
       </div>
 
       {result && (
-        <div className="max-w-2xl mx-auto mt-8 bg-green-50 p-6 rounded-xl shadow">
+        <div className="max-w-4xl mx-auto mt-8 bg-white p-6 rounded-xl shadow border">
           <h2 className="text-xl font-semibold mb-4">Exposure Summary</h2>
-          <table className="w-full text-sm">
+          <table className="w-full text-sm border border-gray-300">
+            <thead className="bg-teal-600 text-white">
+              <tr>
+                <th className="px-4 py-2 text-left">{selectedSector}</th>
+                <th className="px-4 py-2">Sectoral</th>
+                <th className="px-4 py-2">Total</th>
+                <th className="px-4 py-2">% of Total</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr className="border-b">
-                <td className="font-medium py-1">Current Exposure</td>
-                <td className="text-right">£{result.currentExposure.toLocaleString()}</td>
+              <tr className="bg-gray-100">
+                <td className="px-4 py-2 font-medium">Current</td>
+                <td className="px-4 py-2">£{result.currentExposure.toLocaleString()}</td>
+                <td className="px-4 py-2">£{result.currentExposure.toLocaleString()}</td>
+                <td className="px-4 py-2">{((result.currentExposure / (result.totalIfApproved - result.newExposure)) * 100).toFixed(2)}%</td>
               </tr>
-              <tr className="border-b">
-                <td className="font-medium py-1">New / Subject Deal</td>
-                <td className="text-right">£{result.newExposure.toLocaleString()}</td>
+              <tr>
+                <td className="px-4 py-2 font-medium">New / Subject deal</td>
+                <td className="px-4 py-2">£{result.newExposure.toLocaleString()}</td>
+                <td className="px-4 py-2">£{result.newExposure.toLocaleString()}</td>
+                <td className="px-4 py-2">-</td>
               </tr>
-              <tr className="border-b font-semibold">
-                <td className="py-1">Total if Approved</td>
-                <td className="text-right">£{result.totalIfApproved.toLocaleString()}</td>
+              <tr className="font-semibold bg-gray-50">
+                <td className="px-4 py-2">Total, if approved</td>
+                <td className="px-4 py-2">£{result.totalIfApproved.toLocaleString()}</td>
+                <td className="px-4 py-2">£{(result.totalIfApproved - result.newExposure + result.newExposure).toLocaleString()}</td>
+                <td className="px-4 py-2">{(result.updatedPct * 100).toFixed(2)}%</td>
               </tr>
-              <tr className="border-b">
-                <td className="font-medium py-1">Within Limit</td>
-                <td className="text-right">£{result.withinLimit.toLocaleString()}</td>
+              <tr>
+                <td className="px-4 py-2 font-medium">Within Limit</td>
+                <td className="px-4 py-2">£{result.withinLimit.toLocaleString()}</td>
+                <td className="px-4 py-2">-</td>
+                <td className="px-4 py-2">{(result.limitPct * 100).toFixed(2)}%</td>
               </tr>
-              <tr className="border-b">
-                <td className="font-medium py-1">Updated %</td>
-                <td className="text-right">{(result.updatedPct * 100).toFixed(2)}%</td>
-              </tr>
-              <tr className="font-semibold text-green-600">
-                <td className="py-1">Remaining Capacity</td>
-                <td className="text-right">£{result.remainingCapacity.toLocaleString()}</td>
+              <tr className="text-green-600 font-semibold">
+                <td className="px-4 py-2">Remaining Capacity</td>
+                <td className="px-4 py-2">£{result.remainingCapacity.toLocaleString()}</td>
+                <td className="px-4 py-2">-</td>
+                <td className="px-4 py-2">{((result.limitPct - result.updatedPct) * 100).toFixed(2)}%</td>
               </tr>
             </tbody>
           </table>
