@@ -87,8 +87,8 @@ export default function SectorExposureTool() {
               <tr className="bg-gray-100">
                 <td className="px-4 py-2 font-medium">Current</td>
                 <td className="px-4 py-2">£{result.currentExposure.toLocaleString()}</td>
-                <td className="px-4 py-2">£{result.currentExposure.toLocaleString()}</td>
-                <td className="px-4 py-2">{((result.currentExposure / (result.totalIfApproved - result.newExposure)) * 100).toFixed(2)}%</td>
+                <td className="px-4 py-2">£{result.totalExposure.toLocaleString()}</td>
+                <td className="px-4 py-2">{((result.currentExposure / result.totalExposure) * 100).toFixed(2)}%</td>
               </tr>
               <tr>
                 <td className="px-4 py-2 font-medium">New / Subject deal</td>
@@ -99,13 +99,13 @@ export default function SectorExposureTool() {
               <tr className="font-semibold bg-gray-50">
                 <td className="px-4 py-2">Total, if approved</td>
                 <td className="px-4 py-2">£{result.totalIfApproved.toLocaleString()}</td>
-                <td className="px-4 py-2">£{(result.totalIfApproved - result.newExposure + result.newExposure).toLocaleString()}</td>
+                <td className="px-4 py-2">£{(result.totalExposure + result.newExposure).toLocaleString()}</td>
                 <td className="px-4 py-2">{(result.updatedPct * 100).toFixed(2)}%</td>
               </tr>
               <tr>
                 <td className="px-4 py-2 font-medium">Within Limit</td>
                 <td className="px-4 py-2">£{result.withinLimit.toLocaleString()}</td>
-                <td className="px-4 py-2">-</td>
+                <td className="px-4 py-2">£{result.totalExposure.toLocaleString()}</td>
                 <td className="px-4 py-2">{(result.limitPct * 100).toFixed(2)}%</td>
               </tr>
               <tr className="text-green-600 font-semibold">
