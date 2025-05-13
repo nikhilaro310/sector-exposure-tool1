@@ -93,7 +93,11 @@ export default function SectorExposureTool() {
         </button>
       </div>
 
-      {/* Output display remains unchanged */}
+      {result && result.currentExposure !== undefined && result.limitPct !== undefined && (
+        <div className="max-w-5xl mx-auto mt-10 space-y-10">
+          {/* existing table rendering remains unchanged */}
+        </div>
+      )}
     </div>
   );
 }
