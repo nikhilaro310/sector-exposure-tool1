@@ -1,10 +1,6 @@
 
 import React, { useState } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu';
-
+ 
 const sectors = [
   'Residential Accommodation - Investment', 'Residential Accommodation - Development', 'Retirement Living',
   'Student Accommodation', 'Co-living', 'Commercial', 'Hotels', 'Pubs & Bars', 'Restaurants', 'Other Leisure',
