@@ -3,8 +3,7 @@ import React, { useState } from 'react';
 const sectors = [
   'Commercial', 'Hotels', 'Pubs & Bars', 'Restaurants', 'Other Leisure',
   'Healthcare', 'Fund Finance', 'Lender Finance', 'Education', 'Professional Services',
-  'Consumer Goods and Retail', 'Industrials', 'Others', 'Hotels - Dev',
-  'Hotels - Dev (as % of Total Hotel Sector)'
+  'Consumer Goods and Retail', 'Industrials', 'Others'
 ];
 
 export default function SectorExposureTool() {
