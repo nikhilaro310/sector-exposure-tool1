@@ -78,7 +78,51 @@ export default function SectorExposureTool() {
 
       {result && result.currentExposure !== undefined && result.limitPct !== undefined && (
         <div className="max-w-5xl mx-auto mt-10 space-y-10">
-          {/* Output table placeholder remains */}
+          <h2 className="text-2xl font-bold text-center text-blue-700 mb-4">Exposure Summary</h2>
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-sm border border-gray-300 text-left">
+              <thead className="bg-blue-100 text-blue-800">
+                <tr>
+                  <th className="px-4 py-2 font-semibold">{selectedSector}</th>
+                  <th className="px-4 py-2 font-semibold">Sectoral</th>
+                  <th className="px-4 py-2 font-semibold">Total</th>
+                  <th className="px-4 py-2 font-semibold">% of Total</th>
+                </tr>
+              </thead>
+              <tbody className="bg-white">
+                <tr className="border-t">
+                  <td className="px-4 py-2">Current</td>
+                  <td className="px-4 py-2">£{result.currentExposure.toLocaleString()}</td>
+                  <td className="px-4 py-2">£{result.totalExposure.toLocaleString()}</td>
+                  <td className="px-4 py-2">{((result.currentExposure / result.totalExposure) * 100).toFixed(2)}%</td>
+                </tr>
+                <tr className="border-t">
+                  <td className="px-4 py-2">New / Subject deal</td>
+                  <td className="px-4 py-2">£{result.newExposure.toLocaleString()}</td>
+                  <td className="px-4 py-2">£{result.newExposure.toLocaleString()}</td>
+                  <td className="px-4 py-2">-</td>
+                </tr>
+                <tr className="border-t bg-gray-50 font-semibold">
+                  <td className="px-4 py-2">Total, if approved</td>
+                  <td className="px-4 py-2">£{result.totalIfApproved.toLocaleString()}</td>
+                  <td className="px-4 py-2">£{(result.totalExposure + result.newExposure).toLocaleString()}</td>
+                  <td className="px-4 py-2">{(result.updatedPct * 100).toFixed(2)}%</td>
+                </tr>
+                <tr className="border-t">
+                  <td className="px-4 py-2">Within Limit</td>
+                  <td className="px-4 py-2">£{result.withinLimit.toLocaleString()}</td>
+                  <td className="px-4 py-2">£{result.totalExposure.toLocaleString()}</td>
+                  <td className="px-4 py-2">{(result.limitPct * 100).toFixed(2)}%</td>
+                </tr>
+                <tr className="border-t text-green-700 font-semibold">
+                  <td className="px-4 py-2">Remaining Capacity</td>
+                  <td className="px-4 py-2">£{result.remainingCapacity.toLocaleString()}</td>
+                  <td className="px-4 py-2">-</td>
+                  <td className="px-4 py-2">{((result.limitPct - result.updatedPct) * 100).toFixed(2)}%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </div>
