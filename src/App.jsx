@@ -44,6 +44,8 @@ export default function SectorExposureTool() {
     }
   ];
 
+  const isValidNumber = !isNaN(parseFloat(loanAmount)) && isFinite(loanAmount);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white p-6 font-sans">
       <h1 className="text-4xl font-extrabold text-center text-blue-800 mb-10">Sector Exposure Calculator</h1>
@@ -95,7 +97,46 @@ export default function SectorExposureTool() {
 
       {result && result.currentExposure !== undefined && result.limitPct !== undefined && (
         <div className="max-w-5xl mx-auto mt-10 space-y-10">
-          {/* existing table rendering remains unchanged */}
+          {/* Output table remains as is */}
+
+          {isValidNumber && (
+            <div>
+              <h2 className="text-2xl font-bold text-center text-blue-700 mb-4">Single Group Exposure Policy Check</h2>
+              <div className="overflow-x-auto">
+                <table className="min-w-full text-sm border border-gray-300 text-left">
+                  <thead className="bg-teal-100 text-teal-800">
+                    <tr>
+                      <th className="px-4 py-2 font-semibold">Date</th>
+                      <th className="px-4 py-2 font-semibold">Policy Description</th>
+                      <th className="px-4 py-2 font-semibold">% Limit</th>
+                      <th className="px-4 py-2 font-semibold">Amt Limit</th>
+                      <th className="px-4 py-2 font-semibold">Subject Deal</th>
+                      <th className="px-4 py-2 font-semibold">Within/Outside Policy</th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white">
+                    {exposurePolicies.map((policy, idx) => {
+                      const limitAmt = policy.limitPct * CET1;
+                      const deal = parseFloat(loanAmount);
+                      const isWithin = deal <= limitAmt;
+                      return (
+                        <tr key={idx} className="border-t">
+                          <td className="px-4 py-2">28-Feb-25</td>
+                          <td className="px-4 py-2">{policy.label}</td>
+                          <td className="px-4 py-2">{(policy.limitPct * 100).toFixed(0)}% of CET1</td>
+                          <td className="px-4 py-2">£{limitAmt.toLocaleString()}</td>
+                          <td className="px-4 py-2 bg-yellow-200 font-semibold">£{deal.toLocaleString()}</td>
+                          <td className={`px-4 py-2 font-semibold ${isWithin ? 'text-green-600' : 'text-red-600'}`}>
+                            {isWithin ? 'Within Policy' : 'Outside Policy'}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>
